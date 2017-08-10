@@ -5,6 +5,7 @@ Filename:       password_app.cpp
 Author:         William Ponton
 Date:           Version 1: 8.7.17   Program design and basic layout                      (1.0 hours)
                 Version 2: 8.8.17   Started some coding - menu, rand, file i/o, etc      (1.5 hours)
+                Version 3. 8.9.17: 6:15pm start
 
 ===============================
 Description:    A password generator application in C++
@@ -43,16 +44,20 @@ while learning how to do some basic password hash and encryption.
 
 
 
-//Update later to not say "using namespace std;" instead use std::cout << "Blah" << std::endl;
+///Update later to not say "using namespace std;" instead use std::cout << "Blah" << std::endl;
 using namespace std;
 ///Don't forget to inherit the class, and where it goes - after namespace (if using one)!
 
 //Function prototypes=====
+
 //random
+
 //file_open
 int file_open(string filename);
+
 //file_read
 //void file_read(string filename);
+
 //file_close
 //void file_close(ifstream passFile);
 
@@ -61,8 +66,8 @@ int main()
 {
     //Variable Declarations:
     int engage = 0;
-    int menu_choice = 0;
     int check = 0;
+    int menu_choice = 0;
     string user_file;
 
     //Program welcome - menu start
@@ -78,7 +83,7 @@ int main()
     cin >> engage;
 
     //While user engages program:
-    while(engage ==1)
+    while(engage == 1)
     {
         //Run program
         //1. Ask for Filename
@@ -88,8 +93,41 @@ int main()
             return 1;
         }
 
-
+        cout << "============================================" << endl;
+        cout << "==================MAIN MENU=================" << endl;
+        cout << "============================================" << endl;
+        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
+        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
+        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
+        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
+        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
+        cout << "============================================" << endl;
         //2. Ask for number of passwords
+        cout << "PLEASE ENTER A MENU SELECTION, OR PRESS 0 TO EXIT: ";
+        cin >> menu_choice;
+
+        ///Fix this so the loop repeats until correct!
+        if(isdigit(menu_choice == 0))
+           {
+              cout << "Invalid selection, try again: ";
+              cin >> menu_choice;
+           }
+        switch(menu_choice){
+            case 1: cout << "Case 1 ho" << endl;
+                break;
+            case 2: cout << "Case 2 ho" << endl;
+                break;
+            case 3: cout << "Case 3 ho" << endl;
+                break;
+            case 4: cout << "Case 4 ho" << endl;
+                break;
+            case 5: cout << "Case 5 ho" << endl;
+                break;
+            default : cout << "Default!" << endl;
+                break;
+        }
+
+
 
         //3. Ask for name/length/special chars for each password
 
@@ -110,11 +148,12 @@ int main()
             cout << "~EXIT~" << endl;
             cout << "Goodbye" << endl;
         }
+
     }//User selected end of program loop
 
-    cout << "Goodbye" << endl; // End of program (error or exit)
+    cout << "With great power comes great responsibility." << endl; // End of program (error or exit)
 
-    ///DID you REMEBER TO CLEAN UP ALL POINTERS AND CLOSE FILES?================================
+    ///DID you REMEMBER TO CLEAN UP ALL POINTERS AND CLOSE FILES?===============================
     ///=========================================================================================
     return 0;
 }//End main=====
@@ -161,11 +200,22 @@ int main()
 //FileOpen/Check
 int file_open(string user_file)
 {
+        cout << "Please enter the filename: ";
+        cin >> user_file;
+        ofstream outputFile;
+        outputFile.open(user_file, ios::out);
+        if(!outputFile)
+        {
+            cout << "O  M   G\nLike, uh your file totally didn't open brah!" << endl;
+        }
+        ///Add File writing
+
+        ///Close it up
+        outputFile.close();
+        /*
         //Variable declarations
         string word;
 
-        cout << "Please enter the filename: ";
-        cin >> user_file;
 
 
         //Use a constructor to open and create a file in one operation:
@@ -178,20 +228,22 @@ int file_open(string user_file)
         //Read and print the file contents.
         //Loop terminates at the end of the file, and end of file flag is set in inOutFile.
         cout << endl;
+
         cout << user_file << endl;
         while(passFile >> word)
         {
             cout << word << " ";
         }
         cout << endl;
-
         //Clear end of file flag to allow additional file operations
         passFile.clear();
 
         //Write a word to the file and close the file
         passFile << "PASSWORD: " << endl;
         passFile.close();
+        */
         return 0;//Return 0 if passFile successfully opens
+
 
 }//End file_open=====
 
@@ -202,10 +254,6 @@ void file_read(string user_file)
 {
         //Variable declarations
         string word;
-
-        cout << "Please enter the filename: ";
-        cin >> user_file;
-
 
         //Use a constructor to open and create a file in one operation:
         fstream passFile(user_file, ios::in | ios::out);
@@ -227,17 +275,20 @@ void file_read(string user_file)
         //Clear end of file flag to allow additional file operations
         passFile.clear();
 
-     \
 }//End file_read=====
 */
-
 /*
 //file_close
-void file_close(ifstream passFile)
+void file_close(string user_file)
 {
+         fstream passFile(user_file, ios::in | ios:: out);
+         if(!passFile)
+        {
+            cout << "The file was not found!" << endl;
+
+        }
          //Write a word to the file and close the file
         passFile << "PASSWORD: BLAH BLAH" << endl;
         passFile.close();
-        return 0;//Return 0 if passFile successfully opens
 }//End file_close=====
 */
