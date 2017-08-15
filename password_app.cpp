@@ -3,9 +3,9 @@
 ===============================
 Filename:       password_app.cpp
 Author:         William Ponton
-Date:           Version 1: 8.7.17   Program design and basic layout                      (1.0 hours)
-                Version 2: 8.8.17   Started some coding - menu, rand, file i/o, etc      (1.5 hours)
-                Version 3. 8.9.17: 6:15pm start
+Date:           Version 1: 8.7.17   Program design and basic layout                             (1.0 hours)
+                Version 2: 8.8.17   Started some coding - menu, rand, file i/o, etc             (1.5 hours)
+                Version 3. 8.9.17:  Flow control of menu, file fixes (user entered filename)    (1.0 hours)
 
 ===============================
 Description:    A password generator application in C++
@@ -113,15 +113,15 @@ int main()
               cin >> menu_choice;
            }
         switch(menu_choice){
-            case 1: cout << "Case 1 ho" << endl;
+            case 1: cout << "Case 1" << endl;
                 break;
-            case 2: cout << "Case 2 ho" << endl;
+            case 2: cout << "Case 2" << endl;
                 break;
-            case 3: cout << "Case 3 ho" << endl;
+            case 3: cout << "Case 3" << endl;
                 break;
-            case 4: cout << "Case 4 ho" << endl;
+            case 4: cout << "Case 4" << endl;
                 break;
-            case 5: cout << "Case 5 ho" << endl;
+            case 5: cout << "Case 5" << endl;
                 break;
             default : cout << "Default!" << endl;
                 break;
@@ -206,7 +206,7 @@ int file_open(string user_file)
         outputFile.open(user_file, ios::out);
         if(!outputFile)
         {
-            cout << "O  M   G\nLike, uh your file totally didn't open brah!" << endl;
+            cout << "~File did not open~" << endl;
         }
         ///Add File writing
 
@@ -248,6 +248,7 @@ int file_open(string user_file)
 }//End file_open=====
 
 
+///Use later?
 /*
 //file_read
 void file_read(string user_file)
@@ -277,6 +278,9 @@ void file_read(string user_file)
 
 }//End file_read=====
 */
+
+
+///Use later?
 /*
 //file_close
 void file_close(string user_file)
