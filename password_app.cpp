@@ -6,6 +6,7 @@ Author:         William Ponton
 Date:           Version 1: 8.7.17   Program design and basic layout                             (1.0 hours)
                 Version 2: 8.8.17   Started some coding - menu, rand, file i/o, etc             (1.5 hours)
                 Version 3. 8.9.17:  Flow control of menu, file fixes (user entered filename)    (1.0 hours)
+                Version 4. 8.17.17: Validation on some menu choices (finals are over!)          (0.75 hours)
 
 ===============================
 Description:    A password generator application in C++
@@ -61,13 +62,27 @@ int file_open(string filename);
 //file_close
 //void file_close(ifstream passFile);
 
-//Main function=====
+//Main menu
+int main_menu(int menu_choice, bool val_menu);
+
+//menu validation
+bool validate(int menu_choice, bool val_menu);
+
+//menu_filter
+int menu_filter(int menu_choice);
+
+
+
+
+//Main function==========================================
 int main()
 {
     //Variable Declarations:
     int engage = 0;
     int check = 0;
     int menu_choice = 0;
+    int selection = 0;
+    bool val_menu = false;
     string user_file;
 
     //Program welcome - menu start
@@ -88,44 +103,19 @@ int main()
         //Run program
         //1. Ask for Filename
         check = file_open(user_file);
+
+        ///Verify filename with parameters and check them!
         if(check != 0)
         {
-            return 1;
+            return 1;//exit program
         }
 
-        cout << "============================================" << endl;
-        cout << "==================MAIN MENU=================" << endl;
-        cout << "============================================" << endl;
-        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
-        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
-        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
-        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
-        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
-        cout << "============================================" << endl;
-        //2. Ask for number of passwords
-        cout << "PLEASE ENTER A MENU SELECTION, OR PRESS 0 TO EXIT: ";
-        cin >> menu_choice;
 
-        ///Fix this so the loop repeats until correct!
-        if(isdigit(menu_choice == 0))
-           {
-              cout << "Invalid selection, try again: ";
-              cin >> menu_choice;
-           }
-        switch(menu_choice){
-            case 1: cout << "Case 1" << endl;
-                break;
-            case 2: cout << "Case 2" << endl;
-                break;
-            case 3: cout << "Case 3" << endl;
-                break;
-            case 4: cout << "Case 4" << endl;
-                break;
-            case 5: cout << "Case 5" << endl;
-                break;
-            default : cout << "Default!" << endl;
-                break;
-        }
+        menu_choice = main_menu(menu_choice, val_menu);
+        selection = menu_filter(menu_choice);
+
+
+
 
 
 
@@ -141,9 +131,10 @@ int main()
         cout << "Try again?" << endl;
         cout << "PRESS 1 FOR YES, 0 fOR EXIT: ";
         cin >> engage;
+        cout << "Engage is equal to: " << engage << endl;
 
         //Validate input here (more Robust) - maybe a function?
-        if(engage != 1 || isdigit(engage) != 1)
+        if(engage != 1 || isalpha(engage) == 1)
         {
             cout << "~EXIT~" << endl;
             cout << "Goodbye" << endl;
@@ -295,4 +286,60 @@ void file_close(string user_file)
         passFile << "PASSWORD: BLAH BLAH" << endl;
         passFile.close();
 }//End file_close=====
+
 */
+//Main_menu
+int main_menu(int menu_choice, bool val_menu){
+
+    cout << "============================================" << endl;
+        cout << "==================MAIN MENU=================" << endl;
+        cout << "============================================" << endl;
+        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
+        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
+        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
+        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
+        cout << "    1. MAKE A NEW PASSWORD     PRESS 1      " << endl;
+        cout << "============================================" << endl;
+        //2. Ask for number of passwords
+        cout << "PLEASE ENTER A MENU SELECTION, OR PRESS 0 TO EXIT: ";
+        cin >> menu_choice;
+        validate(menu_choice, val_menu);
+
+    return menu_choice;
+}
+
+//validate menu_choice
+bool validate(int menu_choice, bool val_menu){
+    if(menu_choice != 1)
+    {
+        val_menu = false;
+        cout << "Exit bool 1" << endl;
+    }
+    if(isdigit(menu_choice) == 0)
+    {
+        val_menu = false;
+        cout << "Exit bool 2" << endl;
+    }
+
+    return val_menu;
+}
+
+//Menu_filter
+int menu_filter(int menu_choice){
+    switch(menu_choice){
+            case 1: cout << "Case 1" << endl;
+                break;
+            case 2: cout << "Case 2" << endl;
+                break;
+            case 3: cout << "Case 3" << endl;
+                break;
+            case 4: cout << "Case 4" << endl;
+                break;
+            case 5: cout << "Case 5" << endl;
+                break;
+            default : cout << "Default!" << endl;
+                break;
+        }
+    return menu_choice;
+}
+
